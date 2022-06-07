@@ -1,0 +1,10 @@
+---
+- hosts: localhost
+  tasks:
+    - name: iteration test
+      ansible.builtin.debug:
+        msg: "{{ 'testuser%02x' | format(item) }}"
+      # range is exclusive of the end point
+      loop: 
+      - {{ lookup('env', 'INSTANCE_NUMBER') }}
+#"{{ range(0, lookup('env', 'INSTANCE_NUMBER'))|list }}"

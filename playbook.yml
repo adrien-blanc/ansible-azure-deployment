@@ -1,0 +1,13 @@
+---
+- hosts: localhost
+
+  connection: local
+
+  tasks:
+    - name: Create resource group
+      azure_rm_resourcegroup:
+        name: Ressource-Group-Ansible-{{ lookup('env', 'ENVIRONMENT') | default('Dev', True) }}
+        location: westeurope
+      register: rg_result
+    - debug:
+        var: rg_result

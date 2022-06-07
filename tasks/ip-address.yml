@@ -1,0 +1,12 @@
+---
+  # Création des adresses IP pour les trois machines du cluster.
+  - name: Create public IP address for Ansible-{{ lookup('env', 'ENVIRONMENT') }}-{{ number }}
+    azure_rm_publicipaddress:
+      resource_group: Ressource-Group-Ansible-{{ lookup('env', 'ENVIRONMENT') }}
+      allocation_method: Static
+      name: Ansible-{{ lookup('env', 'ENVIRONMENT') }}-{{ number }}
+    register: output_ip_address
+
+  - name: Output public IP
+      debug:
+      msg: "The public IP-{{ number }} is {{ output_ip_address.state.ip_address }}"
