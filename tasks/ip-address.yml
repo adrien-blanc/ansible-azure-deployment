@@ -4,6 +4,7 @@
     azure_rm_publicipaddress:
       resource_group: Ressource-Group-Ansible-{{ lookup('env', 'ENVIRONMENT') }}
       allocation_method: Static
+      zones: 1
       name: IP-Ansible-{{ lookup('env', 'ENVIRONMENT') }}-1
     register: output_ip_address_1
 
@@ -14,6 +15,7 @@
     azure_rm_publicipaddress:
       resource_group: Ressource-Group-Ansible-{{ lookup('env', 'ENVIRONMENT') }}
       allocation_method: Static
+      zones: 2
       name: IP-Ansible-{{ lookup('env', 'ENVIRONMENT') }}-2
     register: output_ip_address_2
 
@@ -24,6 +26,7 @@
     azure_rm_publicipaddress:
       resource_group: Ressource-Group-Ansible-{{ lookup('env', 'ENVIRONMENT') }}
       allocation_method: Static
+      zones: 3
       name: IP-Ansible-{{ lookup('env', 'ENVIRONMENT') }}-3
     register: output_ip_address_3
 

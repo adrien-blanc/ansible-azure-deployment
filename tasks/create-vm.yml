@@ -15,8 +15,6 @@
           disk_size_gb: 40
           managed_disk_type: Premium_LRS
           caching: ReadWrite
-      boot_diagnostics:
-        enabled: no 
       os_type: Linux
       image:
         offer: debian-10
@@ -40,8 +38,6 @@
           disk_size_gb: 40
           managed_disk_type: Premium_LRS
           caching: ReadWrite
-      boot_diagnostics:
-        enabled: no
       os_type: Linux
       image:
         offer: debian-10
@@ -65,8 +61,6 @@
           disk_size_gb: 40
           managed_disk_type: Premium_LRS
           caching: ReadWrite
-      boot_diagnostics:
-        enabled: no
       os_type: Linux
       image:
         offer: debian-10
