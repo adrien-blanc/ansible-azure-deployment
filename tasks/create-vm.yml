@@ -6,7 +6,7 @@
       vm_size: Standard_B2s
       location: westeurope
       admin_username: administrateur
-      admin_password: "{{ lookup('password', './password-VM-1.txt length=26', seed=inventory_hostname) }}"
+      admin_password: "{{ lookup('password', './.PASSWORD/password-VM-1.txt length=26', seed=inventory_hostname) }}"
       network_interfaces: Network-Interface-Ansible-{{ lookup('env', 'ENVIRONMENT') }}-1
       zones: [1]
       managed_disk_type: Premium_LRS
@@ -29,7 +29,7 @@
       vm_size: Standard_B2s
       location: westeurope
       admin_username: administrateur
-      admin_password: "{{ lookup('password', './password-VM-2.txt length=26', seed=inventory_hostname) }}"
+      admin_password: "{{ lookup('password', './.PASSWORD/password-VM-2.txt length=26', seed=inventory_hostname) }}"
       network_interfaces: Network-Interface-Ansible-{{ lookup('env', 'ENVIRONMENT') }}-2
       zones: [2]
       managed_disk_type: Premium_LRS
@@ -52,7 +52,7 @@
       vm_size: Standard_B2s
       location: westeurope
       admin_username: administrateur
-      admin_password: "{{ lookup('password', './password-VM-3.txt length=26', seed=inventory_hostname) }}"
+      admin_password: "{{ lookup('password', './.PASSWORD/password-VM-3.txt length=26', seed=inventory_hostname) }}"
       network_interfaces: Network-Interface-Ansible-{{ lookup('env', 'ENVIRONMENT') }}-3
       zones: [3]
       managed_disk_type: Premium_LRS

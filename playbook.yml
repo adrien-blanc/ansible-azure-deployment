@@ -31,28 +31,43 @@
     # - debug:
     #     var: subnet_result
 
-    # - include_tasks: tasks/ip-address.yml
-
-    # - include_tasks: tasks/security-group.yml
-
-    # - include_tasks: tasks/net-interface.yml
-
-    # - include_tasks: tasks/disks.yml
-
-    # - include_tasks: tasks/create-vm.yml
-
-    - name: Create public IP address for LoadBalancer
-      azure_rm_publicipaddress:
-        resource_group: Ressource-Group-Ansible-{{ lookup('env', 'ENVIRONMENT') }}
-        allocation_method: Static
-        zones: 1
-        name: IP-Ansible-{{ lookup('env', 'ENVIRONMENT') }}-LoadBalancer
-      register: output_ip_address
-
-  - debug:
-      var: output_ip_address["state"]["ip_address"]
+    - include_tasks: tasks/ip-address.yml
 
     - name: LoadBalancer
       azure_rm_loadbalancer:
-        name: LoadBalancer-Ansible-{{ lookup('env', 'ENVIRONMENT') }}
+        name: Ansible-{{ lookup('env', 'ENVIRONMENT') }}-LoadBalancer
+        resource_group: Ressource-Group-Ansible-{{ lookup('env', 'ENVIRONMENT') }}
+        location: westeurope
+        frontend_ip_configurations: 
+          - name: LoadBalancerFrontEnd
+            public_ip_address: IP-Ansible-{{ lookup('env', 'ENVIRONMENT') }}-LoadBalancer
+        backend_address_pools:
+          - name: PoolPrincipal
+        probes:
+          - name: apik-server-tcp-integrity-probe
+            port: 80
+            protocol: Tcp
+        load_balancing_rules:
+          - name: HTTP
+            frontend_ip_configuration: LoadBalancerFrontEnd
+            backend_address_pool: PoolPrincipal
+            frontend_port: 80
+            backend_port: 80
+            probe: apik-server-tcp-integrity-probe
+          - name: HTTPS
+            frontend_ip_configuration: LoadBalancerFrontEnd
+            backend_address_pool: PoolPrincipal
+            frontend_port: 443
+            backend_port: 443
+            probe: apik-server-tcp-integrity-probe
+
+    # - include_tasks: tasks/security-group.yml
+
+    - include_tasks: tasks/net-interface.yml
+
+#    # - include_tasks: tasks/disks.yml
+
+    # - include_tasks: tasks/create-vm.yml
+
+
 

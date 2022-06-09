@@ -1,4 +1,5 @@
 venv
+.PASSWORD
 password-VM-1.txt
 password-VM-2.txt
 password-VM-3.txt

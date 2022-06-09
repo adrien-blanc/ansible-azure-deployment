@@ -32,3 +32,12 @@
 
   - debug:
       var: output_ip_address_3["state"]["ip_address"]
+
+
+
+  - name: Create public IP address for LoadBalancer
+    azure_rm_publicipaddress:
+      resource_group: Ressource-Group-Ansible-{{ lookup('env', 'ENVIRONMENT') }}
+      allocation_method: Static
+      zones: ['1', '2', '3']
+      name: IP-Ansible-{{ lookup('env', 'ENVIRONMENT') }}-LoadBalancer
