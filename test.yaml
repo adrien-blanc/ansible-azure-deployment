@@ -1,10 +1,12 @@
 ---
 - hosts: localhost
   tasks:
-    - name: iteration test
+    - name: "Password test 1"
       ansible.builtin.debug:
-        msg: "{{ 'testuser%02x' | format(item) }}"
-      # range is exclusive of the end point
-      loop: 
-      - {{ lookup('env', 'INSTANCE_NUMBER') }}
-#"{{ range(0, lookup('env', 'INSTANCE_NUMBER'))|list }}"
+        msg: "{{ lookup('password', './password-VM-1.txt length=26', seed=inventory_hostname) }}"
+    - name: "Password test 2"
+      ansible.builtin.debug:
+        msg: "{{ lookup('password', './password-VM-2.txt length=26', seed=inventory_hostname) }}"
+    - name: "Password test 3"
+      ansible.builtin.debug:
+        msg: "{{ lookup('password', './password-VM-3.txt length=26', seed=inventory_hostname) }}"

@@ -1,0 +1,5 @@
+---
+  - name: "iteration test"
+    ansible.builtin.debug:
+      msg: "Ressource-Group-Ansible-{{ '%x' | format(item) }}"
+    loop: "{{ lookup('env', 'INSTANCE_NUMBER') }}"

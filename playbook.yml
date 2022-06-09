@@ -6,8 +6,37 @@
   tasks:
     - name: Create resource group
       azure_rm_resourcegroup:
-        name: Ressource-Group-Ansible-{{ lookup('env', 'ENVIRONMENT') | default('Dev', True) }}
+        name: Ressource-Group-Ansible-{{ lookup('env', 'ENVIRONMENT') }}
         location: westeurope
       register: rg_result
     - debug:
         var: rg_result
+
+    - name: Create virtual network
+      azure_rm_virtualnetwork:
+        resource_group: Ressource-Group-Ansible-{{ lookup('env', 'ENVIRONMENT') }}
+        name: VNET-Ansible-{{ lookup('env', 'ENVIRONMENT') }}
+        address_prefixes: "10.0.0.0/16"
+      register: vnet_result
+    - debug:
+        var: vnet_result
+
+    - name: Add subnet
+      azure_rm_subnet:
+        resource_group: Ressource-Group-Ansible-{{ lookup('env', 'ENVIRONMENT') }}
+        name: cluster
+        address_prefix: "10.0.1.0/24"
+        virtual_network: VNET-Ansible-{{ lookup('env', 'ENVIRONMENT') }}
+      register: subnet_result
+    - debug:
+        var: subnet_result
+
+#    - include_tasks: tasks/ip-address.yml
+
+#    - include_tasks: tasks/security-group.yml
+
+#    - include_tasks: tasks/net-interface.yml
+
+#    - include_tasks: tasks/disks.yml
+
+    - include_tasks: tasks/create-vm.yml

@@ -1,9 +1,10 @@
-- name: Create Network Security Group for Ansible-{{ lookup('env', 'ENVIRONMENT') }}-{{ number }}
-        azure_rm_securitygroup:
-        resource_group: Ressource-Group-Ansible-{{ lookup('env', 'ENVIRONMENT') }}
-        name: Security-Group-Ansible-{{ lookup('env', 'ENVIRONMENT') }}-{{ number }}
-        rules:
-            - name: 'allow_web_traffic'
+---
+  - name: Create Network Security Group for Ansible-{{ lookup('env', 'ENVIRONMENT') }}-1
+    azure_rm_securitygroup:
+      resource_group: Ressource-Group-Ansible-{{ lookup('env', 'ENVIRONMENT') }}
+      name: Security-Group-Ansible-{{ lookup('env', 'ENVIRONMENT') }}-1
+      rules:
+          - name: 'allow_web_traffic'
             protocol: Tcp
             destination_port_range:
                 - 80
@@ -11,7 +12,47 @@
             access: Allow
             priority: 301
             direction: Inbound
-            - name: 'allow_ssh_traffic'
+          - name: 'allow_ssh_traffic'
+            protocol: Tcp
+            destination_port_range:
+                - 22
+            access: Allow
+            priority: 300
+
+  - name: Create Network Security Group for Ansible-{{ lookup('env', 'ENVIRONMENT') }}-2
+    azure_rm_securitygroup:
+      resource_group: Ressource-Group-Ansible-{{ lookup('env', 'ENVIRONMENT') }}
+      name: Security-Group-Ansible-{{ lookup('env', 'ENVIRONMENT') }}-2
+      rules:
+          - name: 'allow_web_traffic'
+            protocol: Tcp
+            destination_port_range:
+                - 80
+                - 443
+            access: Allow
+            priority: 301
+            direction: Inbound
+          - name: 'allow_ssh_traffic'
+            protocol: Tcp
+            destination_port_range:
+                - 22
+            access: Allow
+            priority: 300
+
+  - name: Create Network Security Group for Ansible-{{ lookup('env', 'ENVIRONMENT') }}-3
+    azure_rm_securitygroup:
+      resource_group: Ressource-Group-Ansible-{{ lookup('env', 'ENVIRONMENT') }}
+      name: Security-Group-Ansible-{{ lookup('env', 'ENVIRONMENT') }}-3
+      rules:
+          - name: 'allow_web_traffic'
+            protocol: Tcp
+            destination_port_range:
+                - 80
+                - 443
+            access: Allow
+            priority: 301
+            direction: Inbound
+          - name: 'allow_ssh_traffic'
             protocol: Tcp
             destination_port_range:
                 - 22

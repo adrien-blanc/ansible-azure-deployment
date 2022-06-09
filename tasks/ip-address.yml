@@ -1,12 +1,31 @@
 ---
   # Création des adresses IP pour les trois machines du cluster.
-  - name: Create public IP address for Ansible-{{ lookup('env', 'ENVIRONMENT') }}-{{ number }}
+  - name: Create public IP address for Ansible-{{ lookup('env', 'ENVIRONMENT') }}-1
     azure_rm_publicipaddress:
       resource_group: Ressource-Group-Ansible-{{ lookup('env', 'ENVIRONMENT') }}
       allocation_method: Static
-      name: Ansible-{{ lookup('env', 'ENVIRONMENT') }}-{{ number }}
-    register: output_ip_address
+      name: IP-Ansible-{{ lookup('env', 'ENVIRONMENT') }}-1
+    register: output_ip_address_1
 
-  - name: Output public IP
-      debug:
-      msg: "The public IP-{{ number }} is {{ output_ip_address.state.ip_address }}"
+  - debug:
+      var: output_ip_address_1["state"]["ip_address"]
+
+  - name: Create public IP address for Ansible-{{ lookup('env', 'ENVIRONMENT') }}-2
+    azure_rm_publicipaddress:
+      resource_group: Ressource-Group-Ansible-{{ lookup('env', 'ENVIRONMENT') }}
+      allocation_method: Static
+      name: IP-Ansible-{{ lookup('env', 'ENVIRONMENT') }}-2
+    register: output_ip_address_2
+
+  - debug:
+      var: output_ip_address_2["state"]["ip_address"]
+
+  - name: Create public IP address for Ansible-{{ lookup('env', 'ENVIRONMENT') }}-3
+    azure_rm_publicipaddress:
+      resource_group: Ressource-Group-Ansible-{{ lookup('env', 'ENVIRONMENT') }}
+      allocation_method: Static
+      name: IP-Ansible-{{ lookup('env', 'ENVIRONMENT') }}-3
+    register: output_ip_address_3
+
+  - debug:
+      var: output_ip_address_3["state"]["ip_address"]

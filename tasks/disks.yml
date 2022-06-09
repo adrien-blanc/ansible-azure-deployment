@@ -1,0 +1,27 @@
+---
+  - name: Create disk-1
+    azure.azcollection.azure_rm_manageddisk:
+      name: VM-Disk-Ansible-{{ lookup('env', 'ENVIRONMENT') }}-1
+      location: westeurope
+      resource_group: Ressource-Group-Ansible-{{ lookup('env', 'ENVIRONMENT') }}
+      disk_size_gb: 40
+      storage_account_type: Premium_LRS
+      zone: 1
+
+  - name: Create disk-2
+    azure.azcollection.azure_rm_manageddisk:
+      name: VM-Disk-Ansible-{{ lookup('env', 'ENVIRONMENT') }}-2
+      location: westeurope
+      resource_group: Ressource-Group-Ansible-{{ lookup('env', 'ENVIRONMENT') }}
+      disk_size_gb: 40
+      storage_account_type: Premium_LRS
+      zone: 2
+
+  - name: Create disk-3
+    azure.azcollection.azure_rm_manageddisk:
+      name: VM-Disk-Ansible-{{ lookup('env', 'ENVIRONMENT') }}-3
+      location: westeurope
+      resource_group: Ressource-Group-Ansible-{{ lookup('env', 'ENVIRONMENT') }}
+      disk_size_gb: 40
+      storage_account_type: Premium_LRS
+      zone: 3

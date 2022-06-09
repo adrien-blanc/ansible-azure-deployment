@@ -1,0 +1,69 @@
+---
+  - name: Create VM-Ansible-{{ lookup('env', 'ENVIRONMENT') }}-1
+    azure_rm_virtualmachine:
+      resource_group: Ressource-Group-Ansible-{{ lookup('env', 'ENVIRONMENT') }}
+      name: VM-Ansible-{{ lookup('env', 'ENVIRONMENT') }}-1
+      vm_size: Standard_B2s
+      location: westeurope
+      admin_username: administrateur
+      admin_password: "{{ lookup('password', './password-VM-1.txt length=26', seed=inventory_hostname) }}"
+      network_interfaces: Network-Interface-Ansible-{{ lookup('env', 'ENVIRONMENT') }}-1
+      zones: [1]
+      managed_disk_type: Premium_LRS
+      data_disks:
+        - lun: 0
+          disk_size_gb: 40
+          managed_disk_type: Premium_LRS
+          caching: ReadWrite
+      os_type: Linux
+      image:
+        offer: debian-10
+        publisher: Debian
+        sku: 10
+        version: latest
+
+  - name: Create VM-Ansible-{{ lookup('env', 'ENVIRONMENT') }}-2
+    azure_rm_virtualmachine:
+      resource_group: Ressource-Group-Ansible-{{ lookup('env', 'ENVIRONMENT') }}
+      name: VM-Ansible-{{ lookup('env', 'ENVIRONMENT') }}-2
+      vm_size: Standard_B2s
+      location: westeurope
+      admin_username: administrateur
+      admin_password: "{{ lookup('password', './password-VM-2.txt length=26', seed=inventory_hostname) }}"
+      network_interfaces: Network-Interface-Ansible-{{ lookup('env', 'ENVIRONMENT') }}-2
+      zones: [2]
+      managed_disk_type: Premium_LRS
+      data_disks:
+        - lun: 0
+          disk_size_gb: 40
+          managed_disk_type: Premium_LRS
+          caching: ReadWrite
+      os_type: Linux
+      image:
+        offer: debian-10
+        publisher: Debian
+        sku: 10
+        version: latest
+
+  - name: Create VM-Ansible-{{ lookup('env', 'ENVIRONMENT') }}-3
+    azure_rm_virtualmachine:
+      resource_group: Ressource-Group-Ansible-{{ lookup('env', 'ENVIRONMENT') }}
+      name: VM-Ansible-{{ lookup('env', 'ENVIRONMENT') }}-3
+      vm_size: Standard_B2s
+      location: westeurope
+      admin_username: administrateur
+      admin_password: "{{ lookup('password', './password-VM-3.txt length=26', seed=inventory_hostname) }}"
+      network_interfaces: Network-Interface-Ansible-{{ lookup('env', 'ENVIRONMENT') }}-3
+      zones: [3]
+      managed_disk_type: Premium_LRS
+      data_disks:
+        - lun: 0
+          disk_size_gb: 40
+          managed_disk_type: Premium_LRS
+          caching: ReadWrite
+      os_type: Linux
+      image:
+        offer: debian-10
+        publisher: Debian
+        sku: 10
+        version: latest
