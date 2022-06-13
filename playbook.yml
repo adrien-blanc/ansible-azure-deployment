@@ -6,7 +6,7 @@
   tasks:
     - name: Create resource group
       azure_rm_resourcegroup:
-        name: Ressource-Group-Ansible-{{ lookup('env', 'ENVIRONMENT') }}
+        name: Resource-Group-Ansible-{{ lookup('env', 'ENVIRONMENT') }}
         location: westeurope
       register: rg_result
     - debug:
@@ -14,7 +14,7 @@
 
     - name: Create virtual network
       azure_rm_virtualnetwork:
-        resource_group: Ressource-Group-Ansible-{{ lookup('env', 'ENVIRONMENT') }}
+        resource_group: Resource-Group-Ansible-{{ lookup('env', 'ENVIRONMENT') }}
         name: VNET-Ansible-{{ lookup('env', 'ENVIRONMENT') }}
         address_prefixes: "10.0.0.0/16"
       register: vnet_result
@@ -23,7 +23,7 @@
 
     - name: Add subnet
       azure_rm_subnet:
-        resource_group: Ressource-Group-Ansible-{{ lookup('env', 'ENVIRONMENT') }}
+        resource_group: Resource-Group-Ansible-{{ lookup('env', 'ENVIRONMENT') }}
         name: cluster
         address_prefix: "10.0.1.0/24"
         virtual_network: VNET-Ansible-{{ lookup('env', 'ENVIRONMENT') }}
@@ -36,7 +36,7 @@
     - name: LoadBalancer
       azure_rm_loadbalancer:
         name: Ansible-{{ lookup('env', 'ENVIRONMENT') }}-LoadBalancer
-        resource_group: Ressource-Group-Ansible-{{ lookup('env', 'ENVIRONMENT') }}
+        resource_group: Resource-Group-Ansible-{{ lookup('env', 'ENVIRONMENT') }}
         location: westeurope
         sku: Standard
         frontend_ip_configurations: 
@@ -62,13 +62,63 @@
             backend_port: 443
             probe: apik-server-tcp-integrity-probe
 
-    - include_tasks: tasks/security-group.yml
+#    - include_tasks: tasks/security-group.yml
 
-    - include_tasks: tasks/net-interface.yml
+#    - include_tasks: tasks/net-interface.yml
 
-#    - include_tasks: tasks/disks.yml
+#    - include_tasks: tasks/create-vm.yml
 
-    - include_tasks: tasks/create-vm.yml
+    - name: Add Image registry
+      azure_rm_containerregistry:
+        name: Ansible{{ lookup('env', 'ENVIRONMENT') }}ImageRegistry
+        resource_group: Resource-Group-Ansible-{{ lookup('env', 'ENVIRONMENT') }}
+        location: westeurope
+        sku: Basic
+        admin_user_enabled: true
+      register: image_registry_result
+    - debug:
+        var: image_registry_result['credentials']['password']
 
+    - name: Add Storage Account
+      azure_rm_storageaccount:
+        name: ansible{{ lookup('env', 'LOWER_ENVIRONMENT') }}
+        resource_group: Resource-Group-Ansible-{{ lookup('env', 'ENVIRONMENT') | lower }}
+        kind: StorageV2
+        access_tier: Hot
+        minimum_tls_version: TLS1_2
+        account_type: Standard_GRS
 
+    - add_host:
+        name: "{{ output_ip_address_1['state']['ip_address'] }}"
+        groups: cluster
+        ansible_connection: ssh
+        ansible_user: administrateur
+        ansible_ssh_pass: "{{lookup('file', '.PASSWORD/password-VM-1.txt') }}"
 
+    - add_host:
+        name: "{{ output_ip_address_2['state']['ip_address'] }}"
+        groups: cluster
+        ansible_connection: ssh
+        ansible_user: administrateur
+        ansible_ssh_pass: "{{lookup('file', '.PASSWORD/password-VM-2.txt') }}"
+
+    - add_host:
+        name: "{{ output_ip_address_3['state']['ip_address'] }}"
+        groups: cluster
+        ansible_connection: ssh
+        ansible_user: administrateur
+        ansible_ssh_pass: "{{lookup('file', '.PASSWORD/password-VM-3.txt') }}"
+
+- name: Setup all VM
+  hosts: all
+  tasks:
+
+  #- include_tasks: tasks/docker-install.yml
+
+  - name: Setup Image Registry (Azure)
+    shell: |
+      sudo docker login ansibleproductionimageregistry.azurecr.io --username "Ansible{{ lookup('env', 'ENVIRONMENT') }}ImageRegistry" --password {{ hostvars['localhost']['image_registry_result']['credentials']['password'] }}
+    register: result
+
+  - debug:
+      msg: "{{result.stdout_lines}}"
