@@ -1,7 +1,7 @@
 ---
   - name: Create VM-Ansible-{{ lookup('env', 'ENVIRONMENT') }}-1
     azure_rm_virtualmachine:
-      resource_group: Ressource-Group-Ansible-{{ lookup('env', 'ENVIRONMENT') }}
+      resource_group: Resource-Group-Ansible-{{ lookup('env', 'ENVIRONMENT') }}
       name: VM-Ansible-{{ lookup('env', 'ENVIRONMENT') }}-1
       vm_size: Standard_B2s
       location: westeurope
@@ -24,7 +24,7 @@
 
   - name: Create VM-Ansible-{{ lookup('env', 'ENVIRONMENT') }}-2
     azure_rm_virtualmachine:
-      resource_group: Ressource-Group-Ansible-{{ lookup('env', 'ENVIRONMENT') }}
+      resource_group: Resource-Group-Ansible-{{ lookup('env', 'ENVIRONMENT') }}
       name: VM-Ansible-{{ lookup('env', 'ENVIRONMENT') }}-2
       vm_size: Standard_B2s
       location: westeurope
@@ -47,7 +47,7 @@
 
   - name: Create VM-Ansible-{{ lookup('env', 'ENVIRONMENT') }}-3
     azure_rm_virtualmachine:
-      resource_group: Ressource-Group-Ansible-{{ lookup('env', 'ENVIRONMENT') }}
+      resource_group: Resource-Group-Ansible-{{ lookup('env', 'ENVIRONMENT') }}
       name: VM-Ansible-{{ lookup('env', 'ENVIRONMENT') }}-3
       vm_size: Standard_B2s
       location: westeurope

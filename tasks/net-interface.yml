@@ -2,7 +2,7 @@
   - name: Create a network interface
     azure_rm_networkinterface:
       name: Network-Interface-Ansible-{{ lookup('env', 'ENVIRONMENT') }}-1
-      resource_group: Ressource-Group-Ansible-{{ lookup('env', 'ENVIRONMENT') }}
+      resource_group: Resource-Group-Ansible-{{ lookup('env', 'ENVIRONMENT') }}
       virtual_network: VNET-Ansible-{{ lookup('env', 'ENVIRONMENT') }}
       subnet_name: cluster
       security_group: Security-Group-Ansible-{{ lookup('env', 'ENVIRONMENT') }}-1
@@ -18,7 +18,7 @@
   - name: Create a network interface
     azure_rm_networkinterface:
       name: Network-Interface-Ansible-{{ lookup('env', 'ENVIRONMENT') }}-2
-      resource_group: Ressource-Group-Ansible-{{ lookup('env', 'ENVIRONMENT') }}
+      resource_group: Resource-Group-Ansible-{{ lookup('env', 'ENVIRONMENT') }}
       virtual_network: VNET-Ansible-{{ lookup('env', 'ENVIRONMENT') }}
       subnet_name: cluster
       security_group: Security-Group-Ansible-{{ lookup('env', 'ENVIRONMENT') }}-2
@@ -34,7 +34,7 @@
   - name: Create a network interface
     azure_rm_networkinterface:
       name: Network-Interface-Ansible-{{ lookup('env', 'ENVIRONMENT') }}-3
-      resource_group: Ressource-Group-Ansible-{{ lookup('env', 'ENVIRONMENT') }}
+      resource_group: Resource-Group-Ansible-{{ lookup('env', 'ENVIRONMENT') }}
       virtual_network: VNET-Ansible-{{ lookup('env', 'ENVIRONMENT') }}
       subnet_name: cluster
       security_group: Security-Group-Ansible-{{ lookup('env', 'ENVIRONMENT') }}-3

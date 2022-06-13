@@ -1,7 +1,7 @@
 ---
   - name: Create Network Security Group for Ansible-{{ lookup('env', 'ENVIRONMENT') }}-1
     azure_rm_securitygroup:
-      resource_group: Ressource-Group-Ansible-{{ lookup('env', 'ENVIRONMENT') }}
+      resource_group: Resource-Group-Ansible-{{ lookup('env', 'ENVIRONMENT') }}
       name: Security-Group-Ansible-{{ lookup('env', 'ENVIRONMENT') }}-1
       rules:
           - name: 'allow_web_traffic'
@@ -21,7 +21,7 @@
 
   - name: Create Network Security Group for Ansible-{{ lookup('env', 'ENVIRONMENT') }}-2
     azure_rm_securitygroup:
-      resource_group: Ressource-Group-Ansible-{{ lookup('env', 'ENVIRONMENT') }}
+      resource_group: Resource-Group-Ansible-{{ lookup('env', 'ENVIRONMENT') }}
       name: Security-Group-Ansible-{{ lookup('env', 'ENVIRONMENT') }}-2
       rules:
           - name: 'allow_web_traffic'
@@ -41,7 +41,7 @@
 
   - name: Create Network Security Group for Ansible-{{ lookup('env', 'ENVIRONMENT') }}-3
     azure_rm_securitygroup:
-      resource_group: Ressource-Group-Ansible-{{ lookup('env', 'ENVIRONMENT') }}
+      resource_group: Resource-Group-Ansible-{{ lookup('env', 'ENVIRONMENT') }}
       name: Security-Group-Ansible-{{ lookup('env', 'ENVIRONMENT') }}-3
       rules:
           - name: 'allow_web_traffic'
