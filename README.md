@@ -14,9 +14,9 @@ Sous ***Ubuntu 20.04.4 LTS***, clonez ce repository à l'endroit souhaité.
 
 ## Result 
 Vous devriez obtenir sous Azure un ressource groupe correspondant à ceci :
-```
+
 ![alt text](https://i.postimg.cc/d1kHgVJQ/Azure-Ansible.png)
-```
+
 Tous les éléments essentiels de l'infrastructure s'y trouve. 
 Lors de l'exécution du **playbook Ansible**, vous devriez obtenir les adresses IP des différentes machines, les mots de passe sont quant à eux stockés dans le dossier **.PASSWORD/** sous la forme de fichiers txt : 
 * password-VM-1.txt
