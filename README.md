@@ -1,4 +1,4 @@
-# READ ME - ansible-deployment
+# READ ME - ansible-azure-deployment
 
 ## Description 
 Ce projet va permettre le déploiement automatique d'une nouvelle infrastructure complète sous Azure. L'infrastructure pourra être déployée selon un environnement spécifique (Production, Staging, Dev, etc.).
