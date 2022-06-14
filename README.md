@@ -67,7 +67,7 @@ Et voilà vous avez tous les éléments nécessaire pour permettre au plugin Ans
 ## Result 
 Vous devriez obtenir sous Azure un ressource groupe correspondant à ceci :
 
-![alt text](https://i.postimg.cc/d1kHgVJQ/Azure-Ansible.png)
+![alt text](https://zupimages.net/up/22/24/wlxw.png)
 
 
 
