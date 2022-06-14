@@ -62,11 +62,11 @@
             backend_port: 443
             probe: apik-server-tcp-integrity-probe
 
-#    - include_tasks: tasks/security-group.yml
+    - include_tasks: tasks/security-group.yml
 
-#    - include_tasks: tasks/net-interface.yml
+    - include_tasks: tasks/net-interface.yml
 
-#    - include_tasks: tasks/create-vm.yml
+    - include_tasks: tasks/create-vm.yml
 
     - name: Add Image registry
       azure_rm_containerregistry:
@@ -113,7 +113,7 @@
   hosts: all
   tasks:
 
-  #- include_tasks: tasks/docker-install.yml
+  - include_tasks: tasks/docker-install.yml
 
   - name: Setup Image Registry (Azure)
     shell: |
